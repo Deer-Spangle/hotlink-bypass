@@ -1,0 +1,23 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12.x
+      - name: Install dependencies
+        run: yarn install
+      - name: Run
+        run: |
+          npm run start &
+          sleep 5 &&
+          curl http://localhost:3001 &&
+          curl http://localhost:3001/img/aHR0cHM6Ly9kLmZ1cmFmZmluaXR5Lm5ldC9hcnQvZHItc3BhbmdsZS8xNDYyODI3MjQ0LzE0NjI4MjcyNDQuZHItc3BhbmdsZV9yZW50aGVhZHNob3Q0X2J5X2NpdHJpZWwtZGExejB4OS5wbmc= &&
