@@ -14,8 +14,7 @@ jobs:
           host: dragoness.es
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           script: |
-            cd /home/spangle/hotlink
+            cd ${{ secrets.SSH_REMOTE_DIR }}
             git pull
             nohup ./start.sh &
