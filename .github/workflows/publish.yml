@@ -1,0 +1,21 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Running commands over ssh"
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: dragoness.es
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          script: |
+            cd /home/spangle/hotlink
+            git pull
+            nohup ./start.sh &
